@@ -1,0 +1,569 @@
+:root {
+  color-scheme: dark;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  --background: #0c0d14;
+  --surface: rgba(24, 26, 39, 0.78);
+  --surface-strong: #1b1d2b;
+  --text: #f4f3fa;
+  --muted: #9293a7;
+  --accent: #a78bfa;
+  --accent-strong: #8062eb;
+  --border: rgba(255, 255, 255, 0.09);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  width: 420px;
+  min-width: 360px;
+  height: 600px;
+  margin: 0;
+  overflow: hidden;
+  color: var(--text);
+  background:
+    radial-gradient(ellipse at 92% 0%, rgba(107, 75, 193, 0.2), transparent 38%),
+    radial-gradient(ellipse at 0% 50%, rgba(40, 100, 145, 0.1), transparent 36%),
+    var(--background);
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  color: inherit;
+}
+
+.app {
+  display: flex;
+  height: 100%;
+  min-height: 0;
+  flex-direction: column;
+  padding: 18px 24px 12px;
+  overflow: hidden;
+}
+
+.header,
+.section-heading,
+.dialog-header,
+.dialog-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header {
+  flex: 0 0 auto;
+  margin-bottom: 16px;
+}
+
+.eyebrow {
+  margin: 0 0 7px;
+  color: var(--accent);
+  font-size: 9px;
+  font-weight: 750;
+  letter-spacing: 0.16em;
+}
+
+h1,
+h2,
+p {
+  margin-top: 0;
+}
+
+h1 {
+  margin-bottom: 0;
+  font-size: 24px;
+  font-weight: 680;
+  letter-spacing: -0.045em;
+}
+
+.bookmark-count {
+  display: grid;
+  min-width: 34px;
+  height: 34px;
+  padding: 0 9px;
+  place-items: center;
+  border: 1px solid rgba(167, 139, 250, 0.25);
+  border-radius: 12px;
+  color: #d3c5ff;
+  background: rgba(139, 112, 218, 0.13);
+  font-size: 12px;
+  font-weight: 650;
+}
+
+.search-box {
+  display: flex;
+  height: 44px;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 11px;
+  padding: 0 12px;
+  border: 1px solid var(--border);
+  border-radius: 13px;
+  background: rgba(255, 255, 255, 0.045);
+  transition: border-color 160ms ease, background 160ms ease;
+}
+
+.search-box:focus-within {
+  border-color: rgba(167, 139, 250, 0.65);
+  background: rgba(255, 255, 255, 0.065);
+}
+
+.search-box svg,
+.icon-button svg {
+  width: 18px;
+  flex: 0 0 auto;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.7;
+}
+
+.search-box svg {
+  color: var(--muted);
+}
+
+.search-box input {
+  width: 100%;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  color: var(--text);
+  background: transparent;
+  font-size: 12px;
+}
+
+.search-box input::placeholder,
+.tag-input::placeholder {
+  color: #77788d;
+}
+
+.search-box kbd {
+  display: grid;
+  width: 20px;
+  height: 21px;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  color: var(--muted);
+  font: inherit;
+  font-size: 10px;
+}
+
+.filters-section {
+  flex: 0 0 auto;
+  margin-top: 17px;
+}
+
+.section-heading {
+  margin-bottom: 11px;
+}
+
+.section-heading h2 {
+  margin: 0;
+  color: #dedee9;
+  font-size: 12px;
+  font-weight: 650;
+}
+
+.section-hint,
+.result-count {
+  color: var(--muted);
+  font-size: 9px;
+  font-weight: 650;
+  letter-spacing: 0.1em;
+}
+
+.tag-filters {
+  display: flex;
+  min-height: 29px;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.filter-chip,
+.bookmark-tag {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.filter-chip {
+  min-height: 27px;
+  padding: 0 10px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: #b6b5c8;
+  background: rgba(255, 255, 255, 0.035);
+  cursor: pointer;
+  font-size: 10px;
+  transition: border-color 150ms ease, color 150ms ease, background 150ms ease;
+}
+
+.filter-chip:hover {
+  border-color: rgba(167, 139, 250, 0.48);
+  color: var(--text);
+}
+
+.filter-chip[aria-pressed="true"] {
+  border-color: rgba(167, 139, 250, 0.54);
+  color: #e4d9ff;
+  background: rgba(137, 108, 222, 0.2);
+}
+
+.results-heading {
+  flex: 0 0 auto;
+  margin-top: 16px;
+}
+
+.result-count {
+  letter-spacing: normal;
+}
+
+.bookmark-grid {
+  display: grid;
+  min-height: 0;
+  max-height: 400px;
+  flex: 1 1 auto;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-content: start;
+  gap: 11px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-color: rgba(167, 139, 250, 0.4) transparent;
+  scrollbar-width: thin;
+}
+
+.app > section[aria-labelledby="bookmarksHeading"] {
+  display: flex;
+  min-height: 0;
+  flex: 1 1 auto;
+  flex-direction: column;
+}
+
+.bookmark-card {
+  position: relative;
+  display: flex;
+  min-width: 0;
+  min-height: 116px;
+  flex-direction: column;
+  padding: 14px 13px 12px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 15px;
+  background: linear-gradient(145deg, rgba(34, 36, 53, 0.83), rgba(20, 21, 32, 0.78));
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.12);
+  backdrop-filter: blur(14px);
+  transition: transform 170ms ease, border-color 170ms ease, box-shadow 170ms ease;
+}
+
+.bookmark-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(167, 139, 250, 0.4);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.23), 0 0 20px rgba(118, 88, 206, 0.08);
+}
+
+.add-bookmark-card {
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  border-style: dashed;
+  border-color: rgba(167, 139, 250, 0.32);
+  color: #c6b7ef;
+  background: rgba(137, 108, 222, 0.07);
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 600;
+  transition: transform 170ms ease, border-color 170ms ease, background 170ms ease;
+}
+
+.add-bookmark-card:hover {
+  border-color: rgba(167, 139, 250, 0.72);
+  background: rgba(137, 108, 222, 0.14);
+}
+
+.add-bookmark-card:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.add-bookmark-icon {
+  display: grid;
+  width: 30px;
+  height: 30px;
+  place-items: center;
+  border: 1px solid rgba(167, 139, 250, 0.3);
+  border-radius: 10px;
+  color: #e4d9ff;
+  background: rgba(137, 108, 222, 0.16);
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.add-bookmark-label {
+  color: #ded5f7;
+}
+
+.bookmark-card-top {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 9px;
+  padding-right: 27px;
+}
+
+.site-mark {
+  display: grid;
+  width: 29px;
+  height: 29px;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 9px;
+  color: #d9cfff;
+  background: linear-gradient(145deg, rgba(155, 123, 241, 0.27), rgba(86, 74, 132, 0.2));
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.bookmark-title {
+  display: block;
+  min-width: 0;
+  overflow: hidden;
+  color: var(--text);
+  font-size: 11px;
+  font-weight: 620;
+  line-height: 1.45;
+  text-decoration: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+a.bookmark-title:hover {
+  color: #c9b8ff;
+}
+
+.bookmark-url {
+  margin: 9px 0 10px;
+  overflow: hidden;
+  color: var(--muted);
+  font-size: 9px;
+  line-height: 1.4;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.bookmark-card-footer {
+  display: flex;
+  min-height: 20px;
+  align-items: center;
+  gap: 5px;
+  margin-top: auto;
+  padding-right: 21px;
+  overflow: hidden;
+}
+
+.bookmark-tag {
+  padding: 4px 7px;
+  border: 1px solid rgba(167, 139, 250, 0.15);
+  border-radius: 999px;
+  color: #c6b7ef;
+  background: rgba(137, 108, 222, 0.11);
+  font-size: 8px;
+}
+
+.no-tags {
+  color: #727387;
+  font-size: 9px;
+}
+
+.edit-tags-button,
+.icon-button {
+  display: grid;
+  place-items: center;
+  border: 0;
+  color: #9999ae;
+  background: transparent;
+  cursor: pointer;
+}
+
+.edit-tags-button {
+  position: absolute;
+  top: 12px;
+  right: 11px;
+  width: 25px;
+  height: 25px;
+  border-radius: 7px;
+  font-size: 15px;
+  transition: color 150ms ease, background 150ms ease;
+}
+
+.edit-tags-button:hover,
+.icon-button:hover {
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.09);
+}
+
+.empty-state {
+  flex: 0 0 auto;
+  margin-bottom: 0;
+  padding: 20px 16px;
+  border: 1px dashed rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.6;
+  text-align: center;
+}
+
+.status-message {
+  min-height: 15px;
+  flex: 0 0 auto;
+  margin: 8px 0 0;
+  color: #f1a4a4;
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+.tag-dialog {
+  width: min(390px, calc(100vw - 32px));
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 18px;
+  color: var(--text);
+  background: #171824;
+  box-shadow: 0 22px 70px rgba(0, 0, 0, 0.55);
+}
+
+.tag-dialog::backdrop {
+  background: rgba(6, 6, 12, 0.72);
+  backdrop-filter: blur(5px);
+}
+
+.dialog-content {
+  padding: 22px;
+}
+
+.dialog-header {
+  align-items: flex-start;
+  margin-bottom: 15px;
+}
+
+.dialog-header h2 {
+  margin: 0;
+  font-size: 18px;
+  letter-spacing: -0.025em;
+}
+
+.icon-button {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+}
+
+.icon-button svg {
+  width: 16px;
+}
+
+.dialog-bookmark-title {
+  margin-bottom: 18px;
+  overflow: hidden;
+  color: var(--muted);
+  font-size: 11px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.field-label {
+  display: block;
+  margin-bottom: 7px;
+  color: #dedee9;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.tag-input {
+  width: 100%;
+  height: 42px;
+  padding: 0 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  outline: none;
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.045);
+  font-size: 11px;
+}
+
+.tag-input:focus {
+  border-color: rgba(167, 139, 250, 0.65);
+}
+
+.field-hint {
+  margin: 8px 0 20px;
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+.dialog-actions {
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.button {
+  min-height: 35px;
+  padding: 0 13px;
+  border: 1px solid transparent;
+  border-radius: 9px;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.button-secondary {
+  border-color: var(--border);
+  color: #c1c0d0;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.button-primary {
+  color: #fff;
+  background: linear-gradient(135deg, #9474ed, #7557d4);
+  box-shadow: 0 5px 14px rgba(117, 87, 212, 0.22);
+}
+
+.button:hover {
+  filter: brightness(1.12);
+}
+
+@media (max-width: 380px) {
+  body {
+    width: 360px;
+  }
+
+  .app {
+    padding-right: 17px;
+    padding-left: 17px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="dark">
+    <title>Менеджер закладок</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="popup.js" defer></script>
+  </head>
+  <body>
+    <main class="app">
+      <header class="header">
+        <div>
+          <p class="eyebrow">ВАША БИБЛИОТЕКА</p>
+          <h1>Закладки</h1>
+        </div>
+        <span id="bookmarkCount" class="bookmark-count" aria-live="polite">0</span>
+      </header>
+
+      <label class="search-box">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="10.8" cy="10.8" r="6.8"></circle>
+          <path d="m16 16 4.2 4.2"></path>
+        </svg>
+        <input
+          id="searchInput"
+          type="search"
+          placeholder="Поиск по названию и тегам..."
+          autocomplete="off"
+          aria-label="Поиск по закладкам и тегам"
+        >
+        <kbd>/</kbd>
+      </label>
+
+      <section class="filters-section" aria-labelledby="filtersHeading">
+        <div class="section-heading">
+          <h2 id="filtersHeading">Фильтры</h2>
+          <span class="section-hint">ТЕГИ</span>
+        </div>
+        <div id="tagFilters" class="tag-filters" aria-label="Фильтр по тегам"></div>
+      </section>
+
+      <section aria-labelledby="bookmarksHeading">
+        <div class="section-heading results-heading">
+          <h2 id="bookmarksHeading">Все закладки</h2>
+          <span id="resultCount" class="result-count"></span>
+        </div>
+        <div id="bookmarkGrid" class="bookmark-grid" aria-live="polite"></div>
+        <p id="emptyState" class="empty-state" hidden></p>
+      </section>
+
+      <p id="statusMessage" class="status-message" role="status" aria-live="polite"></p>
+    </main>
+
+    <dialog id="tagDialog" class="tag-dialog" aria-labelledby="dialogTitle">
+      <form id="tagForm" class="dialog-content">
+        <div class="dialog-header">
+          <div>
+            <p class="eyebrow">ОРГАНИЗУЙТЕ СВОЮ БИБЛИОТЕКУ</p>
+            <h2 id="dialogTitle">Теги закладки</h2>
+          </div>
+          <button id="closeDialogButton" class="icon-button" type="button" aria-label="Закрыть">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="m6 6 12 12M18 6 6 18"></path>
+            </svg>
+          </button>
+        </div>
+        <p id="dialogBookmarkTitle" class="dialog-bookmark-title"></p>
+        <label class="field-label" for="tagInput">Теги</label>
+        <input
+          id="tagInput"
+          class="tag-input"
+          type="text"
+          placeholder="Например: работа, дизайн, идеи"
+          autocomplete="off"
+        >
+        <p class="field-hint">Разделяйте теги запятыми. Оставьте поле пустым, чтобы удалить все теги.</p>
+        <div class="dialog-actions">
+          <button id="cancelDialogButton" class="button button-secondary" type="button">Отмена</button>
+          <button class="button button-primary" type="submit">Сохранить</button>
+        </div>
+      </form>
+    </dialog>
+  </body>
+</html>
